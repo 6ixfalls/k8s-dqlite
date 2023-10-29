@@ -6,7 +6,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* && \
     add-apt-repository ppa:dqlite/dev && \
     apt-get update && \
-    apt-get install -y libraft-dev libdqlite-dev libsqlite3-dev && \
+    apt-get install -y libraft-dev libdqlite-dev libsqlite3-dev dqlite-tools && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /go/src/github.com/canonical/k8s-dqlite
