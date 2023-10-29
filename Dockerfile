@@ -1,7 +1,10 @@
 FROM ubuntu:jammy AS builder
 
 # Install necessary dependencies
-RUN add-apt-repository ppa:dqlite/dev && \
+RUN apt-get update && \
+    apt-get install -y software-properties-common && \
+    rm -rf /var/lib/apt/lists/* && \
+    add-apt-repository ppa:dqlite/dev && \
     apt-get update && \
     apt-get install -y libraft-dev libdqlite-dev libsqlite-dev && \
     rm -rf /var/lib/apt/lists/*
