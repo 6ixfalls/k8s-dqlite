@@ -2,7 +2,7 @@ FROM golang:1.21.3-bookworm AS builder
 
 # Install necessary dependencies
 RUN apt-get update && \
-    apt-get install -y software-properties-common && \
+    apt-get install -y software-properties-common python3-launchpadlib && \
     rm -rf /var/lib/apt/lists/* && \
     add-apt-repository ppa:dqlite/dev && \
     apt-get update && \
