@@ -9,6 +9,9 @@ RUN apt-get update && \
     apt-get install -y libraft-dev libdqlite-dev libsqlite3-dev && \
     rm -rf /var/lib/apt/lists/*
 
+WORKDIR /go/src/github.com/canonical/k8s-dqlite
+COPY . .
+
 # Build k8s-dqlite
 RUN CGO_LDFLAGS_ALLOW="-Wl,-z,now" go build -o /bin/k8s-dqlite -tags libsqlite3,dqlite k8s-dqlite.go
 
