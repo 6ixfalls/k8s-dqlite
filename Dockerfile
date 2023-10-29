@@ -1,4 +1,4 @@
-FROM ubuntu:jammy AS builder
+FROM golang:1.21.3-bookworm AS builder
 
 # Install necessary dependencies
 RUN apt-get update && \
