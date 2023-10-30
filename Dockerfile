@@ -12,7 +12,7 @@ RUN case ${TARGETPLATFORM} in \
          "linux/amd64")  DL_ARCH=amd64  ;; \
          "linux/arm64")  DL_ARCH=arm64  ;; \
     esac \
- && wget -P /tmp "https://dl.google.com/go/go${GO_VERSION}.linux-${DL_ARCH}.tar.gz" -O go.tar.gz
+ && wget "https://dl.google.com/go/go${GO_VERSION}.linux-${DL_ARCH}.tar.gz" -O /tmp/go.tar.gz
 
 RUN tar -C /usr/local -xzf "/tmp/go.tar.gz"
 RUN rm "/tmp/go.tar.gz"
