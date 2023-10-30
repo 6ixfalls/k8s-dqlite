@@ -31,9 +31,8 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* && \
     add-apt-repository ppa:dqlite/dev && \
     apt-get update && \
-    apt-get install -y libraft-dev libdqlite-dev libsqlite-dev && \
+    apt-get install -y dqlite-tools libraft-dev libdqlite-dev libsqlite-dev && \
     rm -rf /var/lib/apt/lists/*
-
 WORKDIR /go/src/github.com/rancher/kine
 COPY . .
 
@@ -43,7 +42,8 @@ RUN CGO_LDFLAGS_ALLOW="-Wl,-z,now" go build -o /bin/k8s-dqlite -tags libsqlite3,
 # Final run container
 FROM ubuntu:jammy
 RUN apt-get update && \
-    apt-get install -y libraft-dev libdqlite-dev libsqlite-dev && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get install -y dqlite-tools libraft-dev libdqlite-dev libsqlite-dev && \
+    rm -rf /var/lib/apt/lists/* && \
+    apt-show-versions dqlite-tools libraft-dev libdqlite-dev libsqlite-dev
 COPY --from=builder /bin/k8s-dqlite /bin/k8s-dqlite
 ENTRYPOINT ["/bin/k8s-dqlite"]
