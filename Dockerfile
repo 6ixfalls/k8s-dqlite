@@ -42,5 +42,6 @@ RUN CGO_LDFLAGS_ALLOW="-Wl,-z,now" go build -o /bin/k8s-dqlite -tags libsqlite3,
 
 # Final run container
 FROM alpine:3.18
+RUN apk add --no-cache build-base gcompat
 COPY --from=builder /bin/k8s-dqlite /bin/k8s-dqlite
 ENTRYPOINT ["/bin/k8s-dqlite"]
