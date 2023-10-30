@@ -41,7 +41,9 @@ COPY . .
 RUN CGO_LDFLAGS_ALLOW="-Wl,-z,now" go build -o /bin/k8s-dqlite -tags libsqlite3,dqlite k8s-dqlite.go
 
 # Final run container
-FROM alpine:3.18
-RUN apk add --no-cache build-base gcompat
+FROM ubuntu:jammy
+RUN apt-get update && \
+    apt-get install -y libraft-dev libdqlite-dev libsqlite-dev && \
+    rm -rf /var/lib/apt/lists/*
 COPY --from=builder /bin/k8s-dqlite /bin/k8s-dqlite
 ENTRYPOINT ["/bin/k8s-dqlite"]
